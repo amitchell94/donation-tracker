@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <div th:replace="fragments/header :: header"></div>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container">
+    <table class="table table-striped col">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Amount</th>
+            <th>Charity</th>
+            <th>Date</th>
+            <th>Currency</th>
+            <th>Recurring</th>
+            <th>Recurring Period</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="donation : ${allDonations}">
+            <td th:text="${donation.id}"></td>
+            <td th:text="${donation.amount}"></td>
+            <td th:text="${donation.charity}"></td>
+            <td th:text="${donation.date}"></td>
+            <td th:text="${donation.currency}"></td>
+            <td th:text="${donation.recurring}"></td>
+            <td th:text="${donation.recurringTimePeriod}"> </td>
+            <td><a th:href="@{/update_id(id=${donation.id})}" class="btn btn-primary">Update</a></td>
+            <td><a th:href="@{/delete_id(id=${donation.id})}" class="btn btn-danger">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
