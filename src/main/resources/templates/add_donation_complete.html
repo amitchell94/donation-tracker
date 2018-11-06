@@ -27,7 +27,7 @@
             <td th:text="${donation.date}"></td>
             <td th:text="${donation.currency}"></td>
             <td th:text="${donation.recurring}"></td>
-            <td th:text="${donation.recurringTimePeriod}"> </td>
+            <td th:text="${donation.donationFrequency + ' ' + donation.recurringPeriod}" > </td>
         </tr>
         </tbody>
     </table>

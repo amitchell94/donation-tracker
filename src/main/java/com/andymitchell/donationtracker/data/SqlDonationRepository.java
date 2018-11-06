@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+import static com.andymitchell.donationtracker.logic.DonationUtils.transformDonationToSqlDonation;
+
 @Repository
 public class SqlDonationRepository implements DonationRepository {
 
@@ -26,22 +28,20 @@ public class SqlDonationRepository implements DonationRepository {
     }
 
     @Override
-    public List<Donation> getAllDonations() {
-        return jdbcTemplate.query("SELECT * FROM " + TABLE_NAME, rowMapper);
+    public List<SqlDonation> getAllDonations() {
+        return  jdbcTemplate.query("SELECT * FROM " + TABLE_NAME, rowMapper);
     }
 
     @Override
     public Donation addDonation(Donation donation) {
         String query = "INSERT INTO " + TABLE_NAME + " VALUES ( null, :amount, :charity, " +
-                ":date, :currency, :recurring, :recurringTimePeriod)";
+                ":date, :currency, :recurring, :recurringTimePeriod, :endDate)";
         KeyHolder key = new GeneratedKeyHolder();
 
-        SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(donation);
+        SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(transformDonationToSqlDonation(donation));
 
         jdbcTemplate.update(query, namedParameters, key);
         donation.setId(key.getKey().intValue());
         return donation;
     }
-
-
 }

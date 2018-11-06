@@ -1,8 +1,10 @@
 package com.andymitchell.donationtracker.presentation;
 
+import com.andymitchell.donationtracker.logic.Donation;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public class DonationFormInput {
     private int id;
@@ -12,8 +14,9 @@ public class DonationFormInput {
     private LocalDate date;
     private String currency;
     private boolean recurring;
-    private String recurringAmount;
+    private int donationFrequency;
     private String recurringPeriod;
+    private LocalDate endDate;
 
     public int getId() {
         return id;
@@ -63,12 +66,12 @@ public class DonationFormInput {
         this.recurring = recurring;
     }
 
-    public String getRecurringAmount() {
-        return recurringAmount;
+    public int getDonationFrequency() {
+        return donationFrequency;
     }
 
-    public void setRecurringAmount(String recurringAmount) {
-        this.recurringAmount = recurringAmount;
+    public void setDonationFrequency(int donationFrequency) {
+        this.donationFrequency = donationFrequency;
     }
 
     public String getRecurringPeriod() {
@@ -77,5 +80,13 @@ public class DonationFormInput {
 
     public void setRecurringPeriod(String recurringPeriod) {
         this.recurringPeriod = recurringPeriod;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 }
